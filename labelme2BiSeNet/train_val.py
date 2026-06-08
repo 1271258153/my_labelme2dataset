@@ -34,8 +34,8 @@ for root, dirs, files in os.walk(image_path):
             total_list.append(file)
 
 total_size = len(total_list)
-train_size = int(total_size * 0.8)
-val_size = total_size-train_size
+train_size = int(total_size * 0.8)          # 80%用于训练
+val_size = total_size-train_size            # 20%用于验证
 
 train_list = random.sample(total_list, train_size)
 remain_list = list(set(total_list) - set(train_list))

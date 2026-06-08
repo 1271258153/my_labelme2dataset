@@ -1,3 +1,6 @@
+# get_dataset.py
+# 将jpg_png文件夹中的jpg图片和png图片转换为dataset文件夹中的gt_png和label_png图片
+
 import cv2
 import os
 from PIL import Image

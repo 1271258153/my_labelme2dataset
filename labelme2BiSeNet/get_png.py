@@ -1,3 +1,7 @@
+# get_png.py
+# 将jpg图片转换为png图片，并保存到jpg_png/jpg目录下
+# 将png图片转换为8位灰度图，并保存到jpg_png/png目录下
+
 import os
 from PIL import Image
 import numpy as np
@@ -5,12 +9,12 @@ import numpy as np
 
 def main():
     # 读取原文件夹
-    count = os.listdir("before")
+    count = os.listdir("infrared_iamges")        # 注意修改为自己的地址！！！
     for i in range(0, len(count)):
         # 如果里的文件以jpg结尾
         # 则寻找它对应的png
         if count[i].endswith("jpg"):
-            path = os.path.join("before", count[i])
+            path = os.path.join("infrared_iamges", count[i]) # 注意修改为自己的地址！！！
             img = Image.open(path)
             if not os.path.exists('jpg_png/jpg'):
                 os.makedirs('jpg_png/jpg')
