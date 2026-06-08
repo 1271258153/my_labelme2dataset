@@ -1,3 +1,6 @@
+# json_to_dataset.py: 将labelme标注的json文件转换为BiSeNet的输入格式
+# 执行完之后，得到output文件夹
+
 import argparse
 import json
 import os
@@ -8,9 +11,10 @@ import yaml
 from labelme import utils
 import base64
 def main():
-    count = os.listdir("./before/")
+    # 数据集路径
+    count = os.listdir("/root/autodl-tmp/labelme2dataset/labelme2BiSeNet/infrared_iamges")
     for i in range(0, len(count)):
-        path = os.path.join("./before", count[i])
+        path = os.path.join("./infrared_iamges", count[i])           # 数据集相对路径
         if os.path.isfile(path) and path.endswith('json'):
             data = json.load(open(path))
             if data['imageData']:
