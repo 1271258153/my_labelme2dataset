@@ -36,13 +36,15 @@ python get_png.py
 
 > 执行完成后会在当前目录下生成 `jpg_png` 文件夹，其中包含 `img.jpg`、`img.png` 等文件。
 
-### 5. 生成24位灰度图
-`get_png.py`最后生成的是8位灰度图，需要执行`get_dataset.py`
+### 5. 生成8位灰度图
+`get_png.py`最后生成的是24位灰度图，需要执行`get_dataset.py`
 ```bash
 python get_dataset.py
 ```
 
 > 执行完之后，得到`dataset`文件，里面存放了成对的训练图片
+> - `gt_png`：gt_png 保存的是原图，格式从 jpg 变成 png
+> - `label_png`：对 png 图做 RGB→Gray 得到的 8bit 单通道灰度图
 
 ### 6. 剪裁图片大小至1080×704
 分别执行 `resize.py` 和 `crop.py` 文件
