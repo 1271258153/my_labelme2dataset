@@ -46,7 +46,7 @@ python get_dataset.py
 > - `gt_png`：gt_png 保存的是原图，格式从 jpg 变成 png
 > - `label_png`：对 png 图做 RGB→Gray 得到的 8bit 单通道灰度图
 
-### 6. 剪裁图片大小至1080×704
+### 6. 剪裁图片大小至1080×704，会直接替换掉dataset下面的图片
 分别执行 `resize.py` 和 `crop.py` 文件
 ```bash
 python resize.py
@@ -59,3 +59,32 @@ python train_val.py
 python train_val_txt.py
 ```
  > 得到我们需要的文件，即 **`dataset`**、**`train.txt`** 以及 **`val.txt`**，至此数据集的准备工作已经全部完成。
+
+ ***
+**如果要添加的新的数据集，需要修改路径和拓展名**
+```bash
+cd labelme2BiSeNet
+# 建议先清掉旧中间结果，避免和 infrared_iamges 混在一起
+# rm -rf output jpg_png dataset class_name.txt
+# 1. 改路径后执行
+python json_to_dataset.py
+python create_class.py      # base 改为 infrad_images_Flir
+python get_png.py           # 路径 + .JPG 兼容
+python get_dataset.py       # .JPG 兼容
+
+# 第 1–5 步会按原始分辨率生成 dataset/gt_png 和 dataset/label_png
+python resize_cropto_1080x704.py # 将新增的数据集裁剪到1080*704
+
+# 修改 train_val.py 的数据集路径，给新的数据集进行划分
+python train_val.py
+
+# 划分完train 和 val 之后，把新的图片全部拷贝到dataset/gt_png(和label_png)/train 和 val 中
+cp dataset_for_Flir/gt_png/train/* dataset/gt_png/train/
+cp dataset_for_Flir/gt_png/val/* dataset/gt_png/val/
+cp dataset_for_Flir/label_png/train/* dataset/label_png/train/
+cp dataset_for_Flir/label_png/val/* dataset/label_png/val/
+
+# 最后再执行 train_val_txt.py
+python train_val_txt.py
+```
+***
