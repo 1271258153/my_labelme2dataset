@@ -3,7 +3,7 @@
 # 将png图片转换为8位灰度图，并保存到jpg_png/png目录下
 
 import os
-from PIL import Image
+from PIL import Image, ImageOps
 import numpy as np
 
 
@@ -11,11 +11,12 @@ def main():
     # 读取原文件夹
     count = os.listdir("infrared_iamges")        # 注意修改为自己的地址！！！
     for i in range(0, len(count)):
-        # 如果里的文件以jpg结尾
+        # 如果里的文件以jpg结尾,jpg和JPG兼容
         # 则寻找它对应的png
-        if count[i].endswith("jpg"):
+        if count[i].endswith("jpg") or count[i].endswith("JPG"):
             path = os.path.join("infrared_iamges", count[i]) # 注意修改为自己的地址！！！
             img = Image.open(path)
+            img = ImageOps.exif_transpose(img)              # 解决图片旋转问题
             if not os.path.exists('jpg_png/jpg'):
                 os.makedirs('jpg_png/jpg')
             img.save(os.path.join("jpg_png/jpg", count[i]))
@@ -41,7 +42,8 @@ def main():
             print('new:',new)
             if not os.path.exists('jpg_png/png'):
                 os.makedirs('jpg_png/png')
-            new.save(os.path.join("jpg_png/png", count[i].replace("jpg", "png")))
+            png_name = os.path.splitext(count[i])[0] + ".png"
+            new.save(os.path.join("jpg_png/png", png_name))
             print(np.max(new), np.min(new))
 
 if __name__ == '__main__':

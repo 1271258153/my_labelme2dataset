@@ -14,7 +14,7 @@ jpg_names = os.listdir(jpg_read)
 for j in jpg_names:
     img = Image.open(jpg_read + j)
     j = j.split(".")
-    if j[-1] == "jpg":
+    if j[-1] == "jpg" or j[-1] == "JPG":
         j[-1] = "png"
         j = str.join(".", j)
         # r,g,b,a=img.split()
