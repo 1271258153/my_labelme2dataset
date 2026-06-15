@@ -28,6 +28,20 @@ python json_to_dataset.py
 python create_class.py
 ```
 
+生成了10类
+|_background_|背景（无目标区域）|
+|-|-|
+|BL_Device|BL设备（基础层设备）|
+|CC_Server|CC服务器（内容缓存服务器）|
+|DP_Server|DP服务器（数据处理服务器）|
+|KDVideo_Device|KD视频设备（监控摄像头）|
+|KVM_Switcher|KVM切换器（多台服务器的键鼠显示器切换设备）|
+|SP_Cloud|SP云设备（云存储平台）|
+|VPN_Gateway|VPN网关|
+|WEB_Firewall|Web防火墙|
+|YP_Server|YP服务器（业务应用服务器）|
+
+
 ### 4. 生成类别文件
 执行`get_png.py`，会获得`jpg_png`文件，jpg文件存放了原图，png存放了与之对应的24位灰度图（肉眼看都是黑色的，因为类别都是按照像素值划分的，看上去都是黑的其实像素值都是0，1什么的）
 ```bash
