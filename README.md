@@ -60,11 +60,10 @@ python get_dataset.py
 > - `gt_png`：gt_png 保存的是原图，格式从 jpg 变成 png
 > - `label_png`：对 png 图做 RGB→Gray 得到的 8bit 单通道灰度图
 
-### 6. 剪裁图片大小至1080×704，会直接替换掉dataset下面的图片
-分别执行 `resize.py` 和 `crop.py` 文件
+### 6. 剪裁图片大小至640*640，会直接替换掉dataset下面的图片
 ```bash
-python resize.py
-python crop.py
+python resize_cropto_640x640.py --input ./dataset/gt_png
+python resize_cropto_640x640.py --input ./dataset/label_png --label
 ```
 
 - 完成上述步骤之后，执行train_val.py以及train_val_txt.py文件，即以下代码，将数据集划分成训练集和验证集，并且得到txt文件
@@ -87,7 +86,7 @@ python get_png.py           # 路径 + .JPG 兼容
 python get_dataset.py       # .JPG 兼容
 
 # 第 1–5 步会按原始分辨率生成 dataset/gt_png 和 dataset/label_png
-python resize_cropto_1080x704.py # 将新增的数据集裁剪到1080*704
+python resize_cropto_640x640.py # 将新增的数据集裁剪到640*640
 
 # 修改 train_val.py 的数据集路径，给新的数据集进行划分
 python train_val.py
