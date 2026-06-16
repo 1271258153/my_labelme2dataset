@@ -13,8 +13,8 @@ train_list = []
 val_list = []
 
 
-image_path = 'dataset/gt_png'
-label_path = 'dataset/label_png'
+image_path = 'expand_dataset/gt_png'
+label_path = 'expand_dataset/label_png'
 
 # 清空
 for dir in ['train', 'val']:

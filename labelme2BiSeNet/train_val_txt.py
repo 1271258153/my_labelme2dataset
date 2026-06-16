@@ -2,8 +2,8 @@ import os
 
 
 def write_txt(type,txt):
-    gt = os.listdir("dataset/gt_png/"+type)
-    label = os.listdir("dataset/label_png/"+type)
+    gt = os.listdir("expand_dataset/gt_png/"+type)
+    label = os.listdir("expand_dataset/label_png/"+type)
     with open(txt, "w") as f:
         for i in gt:
             j = i.replace("gt_png","label_png")
