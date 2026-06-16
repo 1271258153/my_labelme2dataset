@@ -85,17 +85,16 @@ python create_class.py      # base 改为 infrad_images_Flir
 python get_png.py           # 路径 + .JPG 兼容
 python get_dataset.py       # .JPG 兼容
 
+# 直接把新数据复制到 dataset 下面
+cp dataset_for_Flir/gt_png/* dataset/gt_png/
+cp dataset_for_Flir/label_png/* dataset/label_png/
+
 # 第 1–5 步会按原始分辨率生成 dataset/gt_png 和 dataset/label_png
-python resize_cropto_640x640.py # 将新增的数据集裁剪到640*640
+# 进行扩充数据集
+python augment_dataset.py
 
 # 修改 train_val.py 的数据集路径，给新的数据集进行划分
 python train_val.py
-
-# 划分完train 和 val 之后，把新的图片全部拷贝到dataset/gt_png(和label_png)/train 和 val 中
-cp dataset_for_Flir/gt_png/train/* dataset/gt_png/train/
-cp dataset_for_Flir/gt_png/val/* dataset/gt_png/val/
-cp dataset_for_Flir/label_png/train/* dataset/label_png/train/
-cp dataset_for_Flir/label_png/val/* dataset/label_png/val/
 
 # 最后再执行 train_val_txt.py
 python train_val_txt.py
