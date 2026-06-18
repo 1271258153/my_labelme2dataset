@@ -60,19 +60,6 @@ python get_dataset.py
 > - `gt_png`：gt_png 保存的是原图，格式从 jpg 变成 png
 > - `label_png`：对 png 图做 RGB→Gray 得到的 8bit 单通道灰度图
 
-### 6. 剪裁图片大小至640*640，会直接替换掉dataset下面的图片
-```bash
-python resize_cropto_640x640.py --input ./dataset/gt_png
-python resize_cropto_640x640.py --input ./dataset/label_png --label
-```
-
-- 完成上述步骤之后，执行train_val.py以及train_val_txt.py文件，即以下代码，将数据集划分成训练集和验证集，并且得到txt文件
-```bash
-python train_val.py
-python train_val_txt.py
-```
- > 得到我们需要的文件，即 **`dataset`**、**`train.txt`** 以及 **`val.txt`**，至此数据集的准备工作已经全部完成。
-
  ***
 **如果要添加的新的数据集，需要修改路径和拓展名**
 ```bash
@@ -89,14 +76,11 @@ python get_dataset.py       # .JPG 兼容
 cp dataset_for_Flir/gt_png/* dataset/gt_png/
 cp dataset_for_Flir/label_png/* dataset/label_png/
 
-# 第 1–5 步会按原始分辨率生成 dataset/gt_png 和 dataset/label_png
+# 将 dataset 进行按6:2:2划分，并生成 train.txt、val.txt、test.txt
+python split_dataset.py
+
 # 进行扩充数据集
-python augment_dataset.py
+python augment_dataset.py   # 将train目录下的图像进行扩充，输出到 expand_dataset 目录下
 
-# 修改 train_val.py 的数据集路径，给新的数据集进行划分
-python train_val.py
-
-# 最后再执行 train_val_txt.py
-python train_val_txt.py
 ```
 ***
